@@ -1,0 +1,133 @@
+name: genz
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  just_audio: ^0.9.18
+  emoji_picker_flutter: ^1.0.9
+  flutter_sound: ^9.1.7+1
+  image_picker: ^0.8.4+4
+  path_provider: ^2.0.11
+  url_launcher: ^6.0.20
+  gallery_saver: ^2.3.1
+  file_picker: ^4.3.0
+  agora_rtc_engine: ^5.0.0
+  permission_handler: ^11.3.1
+  android_intent_plus: ^2.0.2
+  intl: ^0.17.0
+  video_player: ^2.2.7
+  google_ml_kit: ^0.18.0
+  webview_flutter: ^3.0.4
+  pretty_qr_code: ^3.3.0
+  intl_phone_field: ^3.2.0
+  dropdown_button2: ^1.9.4
+  country_list_pick: ^1.0.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/assets/images/profile0.jpg
+    - lib/assets/images/profile1.jpg
+    - lib/assets/images/profile2.jpg
+    - lib/assets/images/profile3.jpg
+    - lib/assets/images/profile4.jpg
+    - lib/assets/images/cover0.jpg
+    - lib/assets/images/cover1.jpg
+    - lib/assets/images/cover2.jpg
+    - lib/assets/images/cover3.jpg
+    - lib/assets/images/cover4.jpg
+    - lib/assets/icons/add_contact_icon.png
+    - lib/assets/icons/scan_icon.png
+    - lib/assets/icons/money_icon.png
+    - lib/assets/icons/notea.png
+    - lib/assets/icons/tea.png
+    - lib/assets/icons/moments.png
+    - lib/assets/icons/thread.png
+    - lib/assets/icons/vibe.png
+    - lib/assets/icons/scan.png
+    - lib/assets/icons/search.png
+    - lib/assets/icons/people.png
+    - lib/assets/icons/zone.png
+    - lib/assets/icons/event.png
+    - lib/assets/icons/travel.png
+    - lib/assets/icons/group.png
+    - lib/assets/icons/gamers.png
+    - lib/assets/icons/wallet.png
+    - lib/assets/icons/money.png
+    - lib/assets/icons/card_repay.png
+    - lib/assets/icons/top_up.png
+    - lib/assets/icons/utilities.png
+    - lib/assets/icons/genz_coins.png
+    - lib/assets/icons/charity.png
+    - lib/assets/icons/health.png
+    - lib/assets/icons/bus.png
+    - lib/assets/icons/hotels.png
+    - lib/assets/icons/railway.png
+    - lib/assets/icons/flight.png
+    - lib/assets/icons/metro.png
+    - lib/assets/icons/shopping_mall.png
+    - lib/assets/icons/specials.png
+    - lib/assets/icons/events_tickets.png
+    - lib/assets/icons/lifestyle_retail.png
+    - lib/assets/icons/buy_together.png
+    - lib/assets/icons/flash_sales.png
+    - lib/assets/icons/used_goods.png
+    - lib/assets/icons/pay_s.png
+    - lib/assets/icons/moments_m.png
+    - lib/assets/icons/about_m.png
+    - lib/assets/icons/vibes_m.png
+    - lib/assets/icons/settings.png
+    - lib/assets/images/flutter_vs_react_native.jpg
+    - lib/assets/images/tech_stack.jpg
+    - lib/assets/videos/video1.mp4
+    - lib/assets/videos/video2.mp4
+    - lib/assets/videos/video3.mp4
+    - lib/assets/images/qr_code.png
+    - lib/assets/icons/scan_icon.png
+    - lib/assets/icons/money_icon.png
+    - lib/assets/icons/receive_money.png
+    - lib/assets/icons/reward_code.png
+    - lib/assets/icons/split_bill.png
+    - lib/assets/icons/transfer.png
+    - lib/assets/icons/whatsapp.png
+    - lib/assets/icons/email.png
+    - lib/assets/icons/messenger.png
+    - lib/assets/icons/messages.png
+    - lib/assets/icons/plus_icon.png
+    - lib/assets/icons/camera_icon.png
+    - lib/assets/icons/image_icon.png
+    - lib/assets/icons/sendmoney_icon.png
+    - lib/assets/icons/icebreakers_icon.png
+    - lib/assets/icons/locations_icon.png
+    - lib/assets/icons/audio_call_icon.png
+    - lib/assets/icons/video_call_icon.png
+    - lib/assets/icons/more_icon.png
+    - lib/assets/icons/sticker.png
+    - lib/assets/icons/chat.png
+    - lib/assets/icons/chatc.png
+    - lib/assets/icons/fling.png
+    - lib/assets/icons/flingc.png
+    - lib/assets/icons/vibe.png
+    - lib/assets/icons/vibec.png
+    - lib/assets/icons/me.png
+    - lib/assets/icons/mec.png
+    - lib/assets/images/homes.png
+    - lib/assets/images/signup.png
+    - lib/assets/images/verification.png
+    - lib/assets/images/login.png
+    - lib/assets/data/countries.json
