@@ -10,6 +10,11 @@ class UserProfilePage extends StatelessWidget {
   final String relationshipStatus;
   final String image;
   final String cover;
+  final String workAt;
+  final String workPosition;
+  final String religion;
+  final String language;
+  final String gender;
 
   UserProfilePage({
     required this.name,
@@ -20,6 +25,11 @@ class UserProfilePage extends StatelessWidget {
     required this.relationshipStatus,
     required this.image,
     required this.cover,
+    required this.workAt,
+    required this.workPosition,
+    required this.religion,
+    required this.language,
+    required this.gender,
   });
 
   @override
@@ -133,6 +143,56 @@ class UserProfilePage extends StatelessWidget {
                   SizedBox(height: 5),
                   Text(
                     relationshipStatus,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Works At',
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    workAt,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Work Position',
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    workPosition,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Religion',
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    religion,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Language',
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    language,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Gender',
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    gender,
                     style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(height: 20),

@@ -19,9 +19,14 @@ class _FlingPageState extends State<FlingPage> {
       'dob': 'January 20, 2000',
       'status': 'Looking for adventure',
       'relationshipStatus': 'Single',
-      'distance': 1.5, 
+      'distance': 1.5,
       'image': 'lib/assets/images/profile0.jpg',
       'cover': 'lib/assets/images/cover0.jpg',
+      'workAt': 'Some Company',
+      'workPosition': 'Software Engineer',
+      'religion': 'Islam',
+      'language': 'English',
+      'gender': 'Male',
     },
     {
       'name': 'Shinobu Kocho',
@@ -30,9 +35,14 @@ class _FlingPageState extends State<FlingPage> {
       'dob': 'March 5, 1999',
       'status': 'Exploring life',
       'relationshipStatus': 'Single',
-      'distance': 2.3, 
+      'distance': 2.3,
       'image': 'lib/assets/images/profile1.jpg',
       'cover': 'lib/assets/images/cover1.jpg',
+      'workAt': 'Another Company',
+      'workPosition': 'Biochemist',
+      'religion': 'Shinto',
+      'language': 'Japanese',
+      'gender': 'Female',
     },
     {
       'name': 'Zenitsu Agatsuma',
@@ -41,9 +51,14 @@ class _FlingPageState extends State<FlingPage> {
       'dob': 'April 15, 2001',
       'status': 'Seeking thrill',
       'relationshipStatus': 'Complicated',
-      'distance': 0.8, 
+      'distance': 0.8,
       'image': 'lib/assets/images/profile2.jpg',
       'cover': 'lib/assets/images/cover2.jpg',
+      'workAt': 'Kyoto Labs',
+      'workPosition': 'Technician',
+      'religion': 'Buddhism',
+      'language': 'Japanese',
+      'gender': 'Male',
     },
     {
       'name': 'Tanjiro Kamado',
@@ -52,9 +67,14 @@ class _FlingPageState extends State<FlingPage> {
       'dob': 'July 14, 2001',
       'status': 'On a journey',
       'relationshipStatus': 'In a relationship',
-      'distance': 3.0, 
+      'distance': 3.0,
       'image': 'lib/assets/images/profile3.jpg',
       'cover': 'lib/assets/images/cover3.jpg',
+      'workAt': 'Osaka Industrial',
+      'workPosition': 'Engineer',
+      'religion': 'Shinto',
+      'language': 'Japanese',
+      'gender': 'Male',
     },
     {
       'name': 'Nezuko Kamado',
@@ -63,9 +83,14 @@ class _FlingPageState extends State<FlingPage> {
       'dob': 'December 28, 2002',
       'status': 'Finding my way',
       'relationshipStatus': 'Single',
-      'distance': 5.1, 
+      'distance': 5.1,
       'image': 'lib/assets/images/profile4.jpg',
       'cover': 'lib/assets/images/cover4.jpg',
+      'workAt': 'Art Studios London',
+      'workPosition': 'Artist',
+      'religion': 'Christianity',
+      'language': 'English',
+      'gender': 'Female',
     },
   ];
 
@@ -224,6 +249,11 @@ class _FlingPageState extends State<FlingPage> {
                           relationshipStatus: users[currentIndex]['relationshipStatus'] ?? 'Unknown',
                           image: users[currentIndex]['image']!,
                           cover: users[currentIndex]['cover']!,
+                          workAt: users[currentIndex]['workAt'] ?? '',
+                          workPosition: users[currentIndex]['workPosition'] ?? '',
+                          religion: users[currentIndex]['religion'] ?? '',
+                          language: users[currentIndex]['language'] ?? '',
+                          gender: users[currentIndex]['gender'] ?? '',
                         ),
                       ),
                     );
@@ -320,10 +350,10 @@ class _FlingPageState extends State<FlingPage> {
                                   ),
                                 ),
                                 Positioned(
-                                  top: 110, 
-                                  right: 10, 
+                                  top: 110,
+                                  right: 10,
                                   child: Text(
-                                    '${users[currentIndex]['distance'] ?? 0.0} km away', 
+                                    '${users[currentIndex]['distance'] ?? 0.0} km away',
                                     style: TextStyle(
                                       color: Colors.white70,
                                       fontSize: 12,
@@ -381,10 +411,11 @@ class _FlingPageState extends State<FlingPage> {
                 ),
               ),
             ),
-           if (showPopup) NearbyPopup(
-             nearbyUsers: users, // এখানে একাধিক ব্যবহারকারী থাকবে
-             onGreet: () => handleTeaAction(true), // Greeting ফাংশন কল
-           ),
+            if (showPopup)
+              NearbyPopup(
+                nearbyUsers: users, // এখানে একাধিক ব্যবহারকারী থাকবে
+                onGreet: () => handleTeaAction(true), // Greeting ফাংশন কল
+              ),
           ],
         ),
         floatingActionButton: FloatingActionButton(

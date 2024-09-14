@@ -299,7 +299,7 @@ class _ChatPageState extends State<ChatPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.userName, 
+                    widget.userName,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 14, color: Colors.white), // ফন্ট ছোট এবং রং সাদা করা হয়েছে
                   ),
@@ -347,7 +347,7 @@ class _ChatPageState extends State<ChatPage> {
                   if (messageIndex >= 0 && messageIndex < _messages.length) {
                     bool showDate = false;
 
-                    if (messageIndex == _messages.length - 1 || 
+                    if (messageIndex == _messages.length - 1 ||
                         _messages[messageIndex]['time'].day != _messages[messageIndex + 1]['time'].day) {
                       showDate = true;
                     }
@@ -429,6 +429,11 @@ class _ChatPageState extends State<ChatPage> {
                       dob: 'Date of Birth',  // উদাহরণ হিসেবে
                       status: 'User status here', // উদাহরণ হিসেবে
                       relationshipStatus: 'Relationship status here',  // উদাহরণ
+                      workAt: 'Some Company', // Add workAt
+                      workPosition: 'Software Engineer', // Add workPosition
+                      religion: 'Religion', // Add religion
+                      language: 'English', // Add language
+                      gender: 'Gender', // Add gender
                       image: widget.profileImage,
                       cover: 'assets/images/cover_image.png',  // উদাহরণ হিসেবে কাভার ইমেজ পাথ
                     ),

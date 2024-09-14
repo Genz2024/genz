@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart'; // google_ml_kit প্যাকেজ ব্যবহার করা হলো
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart'; // Flutter Barcode Scanner প্যাকেজ ব্যবহার করা হলো
 import 'package:image_picker/image_picker.dart'; // For capturing image using camera
 import 'chat_page.dart'; // ChatPage ইম্পোর্ট করা হলো
 import 'widgets/custom_navbar.dart'; // CustomNavBar import করা হলো
@@ -388,19 +388,10 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
-  final BarcodeScanner barcodeScanner = GoogleMlKit.vision.barcodeScanner(); // google_ml_kit এর নতুন Scanner ব্যবহার করা হয়েছে
-  final ImagePicker _picker = ImagePicker(); // For selecting images from camera
-
   @override
   void initState() {
     super.initState();
-    _scanBarcode(); // Page load হলে সরাসরি ক্যামেরা খুলবে
-  }
-
-  @override
-  void dispose() {
-    barcodeScanner.close(); // স্ক্যানার বন্ধ করা হবে যখন পেজ ডিসপোজ হবে
-    super.dispose();
+    _scanBarcode(); // Page load হলে সরাসরি স্ক্যান শুরু হবে
   }
 
   @override
@@ -412,26 +403,21 @@ class _ScanPageState extends State<ScanPage> {
 
   Future<void> _scanBarcode() async {
     try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.camera); // Camera থেকে ছবি নেওয়া হচ্ছে
-      if (image == null) {
-        Navigator.pop(context); // If no image was captured, return back
-        return;
-      }
+      String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        "#ff6666", // Barcode scanner color
+        "Cancel", // Cancel text
+        true, // Show flash
+        ScanMode.BARCODE, // Scan barcode only
+      );
 
-      final inputImage = InputImage.fromFilePath(image.path); // Image path ব্যবহার করে inputImage তৈরি করা হলো
-      final List<Barcode> barcodes = await barcodeScanner.processImage(inputImage); // স্ক্যান করা বারকোডগুলো প্রসেস করা হবে
-
-      for (Barcode barcode in barcodes) {
-        final String? rawValue = barcode.rawValue; // displayValue এর পরিবর্তে rawValue ব্যবহার করা হলো
-        if (rawValue != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Scanned Code: $rawValue')),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No valid code found')),
-          );
-        }
+      if (barcodeScanRes != "-1") {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Scanned Code: $barcodeScanRes')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Scan cancelled')),
+        );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

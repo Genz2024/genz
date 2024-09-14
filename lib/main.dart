@@ -19,7 +19,6 @@ import 'widgets/vibes/threads/create_thread.dart';
 import 'widgets/vibes/vibe_video_page.dart';
 import 'widgets/vibes/search_page.dart';
 import 'widgets/vibes/scanner_page.dart';
-import 'widgets/vibes/people_nearby_page.dart';
 import 'widgets/vibes/create_event_page.dart';
 import 'widgets/vibes/event_discovery_page.dart';
 import 'me_page.dart';
@@ -96,7 +95,6 @@ class GenZApp extends StatelessWidget {
         '/vibes': (context) => VibeVideoPage(),
         '/scan': (context) => ScannerPage(),
         '/search': (context) => SearchPage(),
-        '/people_nearby': (context) => PeopleNearbyPage(),
         '/create_event': (context) => CreateEventPage(),
         '/event_discovery': (context) => EventDiscoveryPage(),
         '/profile': (context) => MePage(),
@@ -119,6 +117,11 @@ class GenZApp extends StatelessWidget {
               dob: 'Default DOB',
               status: 'Default Status',
               relationshipStatus: 'Single',
+              workAt: 'Default Company',
+              workPosition: 'Default Position',
+              religion: 'Default Religion',
+              language: 'Default Language',
+              gender: 'Default Gender',
               image: 'lib/assets/images/default.jpg',
               cover: 'lib/assets/images/default_cover.jpg',
             ),

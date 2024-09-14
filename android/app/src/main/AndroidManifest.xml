@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+    <!-- ক্যামেরা ব্যবহার করার জন্য পারমিশন -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <!-- Required to query activities that can process text -->
     <queries>
         <intent>
@@ -20,6 +23,8 @@
         android:label="genz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        
+        <!-- MainActivity সেটিংস -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -38,6 +43,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Flutter Embed করা -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

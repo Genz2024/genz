@@ -15,6 +15,7 @@ class _AboutMePageState extends State<AboutMePage> {
   final TextEditingController _dobController = TextEditingController();
 
   String _relationshipStatus = 'Single'; // Default status
+  String _gender = 'Male'; // Default gender
 
   @override
   void initState() {
@@ -89,6 +90,48 @@ class _AboutMePageState extends State<AboutMePage> {
     );
   }
 
+  void _showGenderPicker() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          color: Colors.black,
+          child: ListView(
+            children: [
+              ListTile(
+                title: Text('Male', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  setState(() {
+                    _gender = 'Male';
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Female', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  setState(() {
+                    _gender = 'Female';
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Other', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  setState(() {
+                    _gender = 'Other';
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,6 +174,21 @@ class _AboutMePageState extends State<AboutMePage> {
                   ),
                   child: Text(
                     _relationshipStatus,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              GestureDetector(
+                onTap: _showGenderPicker,
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    labelText: 'Gender',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    border: OutlineInputBorder(),
+                  ),
+                  child: Text(
+                    _gender,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
