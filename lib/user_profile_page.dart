@@ -11,10 +11,10 @@ class UserProfilePage extends StatelessWidget {
   final String image;
   final String cover;
   final String workAt;
-  final String workPosition;
-  final String religion;
-  final String language;
-  final String gender;
+  final String workPosition; // নতুনভাবে workPosition প্যারামিটার যোগ করা হয়েছে
+  final String religion; // নতুনভাবে religion প্যারামিটার যোগ করা হয়েছে
+  final String language; // নতুনভাবে language প্যারামিটার যোগ করা হয়েছে
+  final String gender; // নতুনভাবে gender প্যারামিটার যোগ করা হয়েছে
 
   UserProfilePage({
     required this.name,
@@ -26,10 +26,10 @@ class UserProfilePage extends StatelessWidget {
     required this.image,
     required this.cover,
     required this.workAt,
-    required this.workPosition,
-    required this.religion,
-    required this.language,
-    required this.gender,
+    required this.workPosition, // Constructor এ workPosition প্যারামিটার যোগ করা হয়েছে
+    required this.religion, // Constructor এ religion প্যারামিটার যোগ করা হয়েছে
+    required this.language, // Constructor এ language প্যারামিটার যোগ করা হয়েছে
+    required this.gender, // Constructor এ gender প্যারামিটার যোগ করা হয়েছে
   });
 
   @override
@@ -147,7 +147,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'Works At',
+                    'Works at',
                     style: TextStyle(color: Colors.white70, fontSize: 16),
                   ),
                   SizedBox(height: 5),

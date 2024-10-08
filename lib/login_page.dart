@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:genz/home_page.dart';  // Importing the home page
+import 'package:genz/home_page.dart'; // Importing the home page
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,48 +11,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _showPassword = false;
   bool _usePasswordLogin = false; // To toggle between login methods
-  String? _selectedCountry;
-  String _countryCode = '+1'; // Default country code
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  List<Map<String, dynamic>> _countries = []; // Country list to store name and dial codes
+  String _countryCode = '+880'; // Default country code for Bangladesh
 
   String? _phoneError;
   String? _passwordError;
-  String? _countryError;
 
   @override
   void initState() {
     super.initState();
-    _loadCountries();
-  }
-
-  Future<void> _loadCountries() async {
-    try {
-      // Load the countries.json file
-      final String response = await rootBundle.loadString('lib/assets/data/countries.json');
-      final data = json.decode(response);
-
-      // Flatten the countries list from multiple continents
-      List<Map<String, dynamic>> countriesList = [];
-      data.forEach((continent, countries) {
-        countriesList.addAll(List<Map<String, dynamic>>.from(countries));
-      });
-
-      setState(() {
-        _countries = countriesList;
-        _selectedCountry = null; // Initially no country selected
-      });
-
-      print("Loaded countries: $_countries"); // Debugging the countries list
-    } catch (e) {
-      print("Error loading countries: $e");
-    }
   }
 
   void _validateInput() {
     setState(() {
-      _countryError = _selectedCountry == null ? 'Please select a country' : null;
       _phoneError = _phoneController.text.isEmpty ? 'Please enter your phone number' : null;
       if (_usePasswordLogin) {
         _passwordError = _passwordController.text.isEmpty ? 'Please enter your password' : null;
@@ -65,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   void _login() {
     _validateInput();
 
-    if (_countryError == null && _phoneError == null && (_passwordError == null || !_usePasswordLogin)) {
+    if (_phoneError == null && (_passwordError == null || !_usePasswordLogin)) {
       if (_usePasswordLogin) {
         Navigator.pushNamed(context, '/chatlist');
       } else {
@@ -74,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
           '/login_verification',
           arguments: {
             'countryCode': _countryCode,
-            'countryName': _selectedCountry,
+            'countryName': 'Bangladesh',
             'phoneNumber': _phoneController.text,
           },
         );
@@ -89,10 +61,10 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(  // Adding the back button
+        leading: IconButton( // Adding the back button
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pushReplacement(  // Navigate to home_page when back is pressed
+            Navigator.pushReplacement( // Navigate to home_page when back is pressed
               context,
               MaterialPageRoute(builder: (context) => HomePage()),
             );
@@ -150,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 20),
-                          // Country Dropdown without Dial Code (Always show this)
+                          // Country Display with Bangladesh Flag (Always show this)
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.6),
@@ -170,46 +142,17 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ],
                             ),
-                            child: DropdownButtonFormField<String>(
-                              value: _selectedCountry,
-                              decoration: InputDecoration(
-                                labelText: 'Select Country',
-                                labelStyle: TextStyle(color: Colors.white),
-                                filled: true,
-                                fillColor: Colors.black.withOpacity(0.6),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide.none,
-                                ),
-                                errorText: _countryError,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '🇧🇩 Bangladesh', // Flag emoji and country name
+                                    style: TextStyle(color: Colors.white, fontSize: 16),
+                                  ),
+                                ],
                               ),
-                              hint: Text(
-                                'Select Country', // Show "Select Country" initially
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              items: _countries.isNotEmpty
-                                  ? _countries.map<DropdownMenuItem<String>>((country) {
-                                      return DropdownMenuItem<String>(
-                                        value: country['name'],
-                                        child: Text(
-                                          country['name'], // Only showing country name here
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      );
-                                    }).toList()
-                                  : [
-                                      DropdownMenuItem(
-                                        child: Text('Loading...', style: TextStyle(color: Colors.white)),
-                                      ),
-                                    ],
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedCountry = value;
-                                  _countryCode = _countries
-                                      .firstWhere((country) => country['name'] == value)['code'];
-                                });
-                              },
-                              dropdownColor: Colors.black,
                             ),
                           ),
                           SizedBox(height: 20),

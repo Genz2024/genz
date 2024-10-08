@@ -3,7 +3,8 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'greeting_page.dart';
 import 'user_profile_page.dart';
 import 'package:genz/widgets/custom_navbar.dart';
-import 'widgets/fling/nearby_popup.dart'; // Nearby Popup import
+import 'widgets/fling/nearby_popup.dart';
+import 'widgets/fling/subscription_modal.dart';
 
 class FlingPage extends StatefulWidget {
   @override
@@ -44,72 +45,33 @@ class _FlingPageState extends State<FlingPage> {
       'language': 'Japanese',
       'gender': 'Female',
     },
-    {
-      'name': 'Zenitsu Agatsuma',
-      'bio': 'Let\'s run through the storms together.',
-      'study': 'Kyoto Institute of Technology',
-      'dob': 'April 15, 2001',
-      'status': 'Seeking thrill',
-      'relationshipStatus': 'Complicated',
-      'distance': 0.8,
-      'image': 'lib/assets/images/profile2.jpg',
-      'cover': 'lib/assets/images/cover2.jpg',
-      'workAt': 'Kyoto Labs',
-      'workPosition': 'Technician',
-      'religion': 'Buddhism',
-      'language': 'Japanese',
-      'gender': 'Male',
-    },
-    {
-      'name': 'Tanjiro Kamado',
-      'bio': 'Always keep moving forward, no matter what.',
-      'study': 'Osaka University',
-      'dob': 'July 14, 2001',
-      'status': 'On a journey',
-      'relationshipStatus': 'In a relationship',
-      'distance': 3.0,
-      'image': 'lib/assets/images/profile3.jpg',
-      'cover': 'lib/assets/images/cover3.jpg',
-      'workAt': 'Osaka Industrial',
-      'workPosition': 'Engineer',
-      'religion': 'Shinto',
-      'language': 'Japanese',
-      'gender': 'Male',
-    },
-    {
-      'name': 'Nezuko Kamado',
-      'bio': 'In the darkest of times, the light shines brightest.',
-      'study': 'University of the Arts London',
-      'dob': 'December 28, 2002',
-      'status': 'Finding my way',
-      'relationshipStatus': 'Single',
-      'distance': 5.1,
-      'image': 'lib/assets/images/profile4.jpg',
-      'cover': 'lib/assets/images/cover4.jpg',
-      'workAt': 'Art Studios London',
-      'workPosition': 'Artist',
-      'religion': 'Christianity',
-      'language': 'English',
-      'gender': 'Female',
-    },
+    // অন্যান্য ব্যবহারকারীদের তথ্য...
   ];
 
   int currentIndex = 0;
   double cardOffsetX = 0;
   double cardOpacity = 1;
-  bool showPopup = false; // Nearby পপ-আপ দেখানোর জন্য একটি boolean ফ্ল্যাগ
+  bool showPopup = false;
+  int swipeCount = 0; // স্লাইড কাউন্ট
+  int greetCount = 0; // গ্রীট কাউন্ট
 
   void handleTeaAction(bool interested) {
     if (interested) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => GreetingPage(
-            userName: users[currentIndex]['name']!,
-            userImage: users[currentIndex]['image']!,
+      greetCount++; // গ্রীট কাউন্ট বাড়ানো
+      if (greetCount >= 5) {
+        showSubscriptionModal(context); // ৫ বার গ্রীট পাঠালে সাবস্ক্রিপশন মডেল শো হবে
+        greetCount = 0; // কাউন্ট রিসেট
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GreetingPage(
+              userName: users[currentIndex]['name']!,
+              userImage: users[currentIndex]['image']!,
+            ),
           ),
-        ),
-      );
+        );
+      }
     } else {
       setState(() {
         cardOffsetX = -2000;
@@ -126,15 +88,19 @@ class _FlingPageState extends State<FlingPage> {
           } else {
             currentIndex = 0;
           }
+
+          swipeCount++; // স্লাইড কাউন্ট বাড়ানো
+          if (swipeCount >= 5) {
+            showSubscriptionModal(context); // ৫ বার স্লাইড করলে সাবস্ক্রিপশন মডেল শো হবে
+            swipeCount = 0; // কাউন্ট রিসেট
+          }
         });
       });
     }
   }
 
   void showNearbyPopup() {
-    setState(() {
-      showPopup = !showPopup; // Nearby popup দেখানো হচ্ছে বা বন্ধ হচ্ছে
-    });
+    showSubscriptionModal(context); // সাবস্ক্রিপশন মডেল শো হবে 'Nearby People' বক্সে ক্লিক করলে
   }
 
   void openBluetoothSettings() async {
@@ -144,13 +110,17 @@ class _FlingPageState extends State<FlingPage> {
     await intent.launch();
   }
 
+  void handleBluetoothOrNearbyClick() {
+    showSubscriptionModal(context); // ব্লুটুথ আইকন বা কাছে থাকা লোকদের ক্লিক করলে সাবস্ক্রিপশন মডেল শো হবে
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (showPopup) {
           setState(() {
-            showPopup = false; // বাইরে ক্লিক করলে পপ-আপ বন্ধ
+            showPopup = false;
           });
         }
       },
@@ -177,7 +147,7 @@ class _FlingPageState extends State<FlingPage> {
                 ),
               ),
               GestureDetector(
-                onTap: openBluetoothSettings,
+                onTap: handleBluetoothOrNearbyClick, // ব্লুটুথ আইকনে ক্লিক করলে সাবস্ক্রিপশন মডেল শো হবে
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 9.0),
                   child: Row(
@@ -192,7 +162,7 @@ class _FlingPageState extends State<FlingPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: openBluetoothSettings,
+                        onTap: handleBluetoothOrNearbyClick, // ব্লুটুথ আইকন ক্লিক হ্যান্ডলিং
                         child: Icon(
                           Icons.bluetooth,
                           color: Color(0xFF699BF7),
@@ -200,7 +170,7 @@ class _FlingPageState extends State<FlingPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: openBluetoothSettings,
+                        onTap: handleBluetoothOrNearbyClick, // টেক্সট ক্লিক হ্যান্ডলিং
                         child: Text(
                           ' Bluetooth',
                           style: TextStyle(
@@ -413,13 +383,13 @@ class _FlingPageState extends State<FlingPage> {
             ),
             if (showPopup)
               NearbyPopup(
-                nearbyUsers: users, // এখানে একাধিক ব্যবহারকারী থাকবে
-                onGreet: () => handleTeaAction(true), // Greeting ফাংশন কল
+                nearbyUsers: users,
+                onGreet: () => handleTeaAction(true),
               ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: showNearbyPopup, // Nearby পপ-আপ দেখার জন্য ম্যানুয়ালি কল
+          onPressed: showNearbyPopup, // Nearby পপ-আপ ক্লিক করলে সাবস্ক্রিপশন মডেল শো হবে
           child: Icon(Icons.person),
           backgroundColor: Color(0xFFE871C5),
         ),

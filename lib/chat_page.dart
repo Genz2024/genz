@@ -214,7 +214,6 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
-  // Drop-up menu show function with 3D Neomorphic style
   void _showDropUpMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -287,7 +286,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black, // এখানে কালো রং যোগ করা হয়েছে
+        backgroundColor: Colors.black,
         title: Row(
           children: [
             CircleAvatar(
@@ -301,7 +300,7 @@ class _ChatPageState extends State<ChatPage> {
                   Text(
                     widget.userName,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 14, color: Colors.white), // ফন্ট ছোট এবং রং সাদা করা হয়েছে
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                   Text(
                     _getLastActiveText(),
@@ -324,7 +323,7 @@ class _ChatPageState extends State<ChatPage> {
           IconButton(
             icon: Image.asset('lib/assets/icons/more_icon.png', width: 24, height: 24),
             onPressed: () {
-              _showMenuOptions(context); // মেনু অপশন দেখাবে
+              _showMenuOptions(context);
             },
           ),
         ],
@@ -390,16 +389,16 @@ class _ChatPageState extends State<ChatPage> {
               onImagePickPressed: _pickImage,
               onCameraPressed: _pickCameraImage,
               onPlusPressed: () {
-                _showDropUpMenu(context); // প্লাস আইকন চাপলে ড্রপ-আপ মেনু দেখাবে
+                _showDropUpMenu(context);
               },
               onStickerPressed: () {
-                print("Sticker icon pressed"); // স্টিকার আইকন প্রেস করলে যা হবে
-              }, // নতুন প্যারামিটার
+                print("Sticker icon pressed");
+              },
               onTextChanged: _onTextChanged,
               isTyping: _isTyping,
               onStartRecording: _startRecording,
               onStopRecording: _stopRecording,
-              showPlusIcon: true,  // Added for the plus icon
+              showPlusIcon: true,
             ),
           ],
         ),
@@ -418,24 +417,23 @@ class _ChatPageState extends State<ChatPage> {
               leading: Icon(Icons.person),
               title: Text('View Profile'),
               onTap: () {
-                // প্রোফাইল ভিউ করতে ন্যাভিগেট
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => UserProfilePage(
-                      name: widget.userName,  // প্রোফাইলের জন্য নাম পাঠানো
-                      bio: 'User bio here',  // উদাহরণ হিসেবে
-                      study: 'Study information here', // উদাহরণ হিসেবে
-                      dob: 'Date of Birth',  // উদাহরণ হিসেবে
-                      status: 'User status here', // উদাহরণ হিসেবে
-                      relationshipStatus: 'Relationship status here',  // উদাহরণ
-                      workAt: 'Some Company', // Add workAt
-                      workPosition: 'Software Engineer', // Add workPosition
-                      religion: 'Religion', // Add religion
-                      language: 'English', // Add language
-                      gender: 'Gender', // Add gender
+                      name: widget.userName,
+                      bio: 'User bio here',
+                      study: 'Study information here',
+                      dob: 'Date of Birth',
+                      status: 'User status here',
+                      relationshipStatus: 'Relationship status here',
+                      workAt: 'Some Company',
+                      workPosition: 'Software Engineer', // Added workPosition
+                      religion: 'Religion', // Added religion
+                      language: 'English', // Added language
+                      gender: 'Gender', // Added gender
                       image: widget.profileImage,
-                      cover: 'assets/images/cover_image.png',  // উদাহরণ হিসেবে কাভার ইমেজ পাথ
+                      cover: 'assets/images/cover_image.png',
                     ),
                   ),
                 );

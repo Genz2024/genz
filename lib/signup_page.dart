@@ -15,9 +15,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   bool _isButtonActive = false;
   bool _termsAccepted = false;
-  String _selectedRegion = 'Select Region';
-  String? _selectedCountryCode;
-  String? _selectedCountryName;
+  String _selectedCountryCode = '+880'; // Default Bangladesh code
+  String _selectedCountryName = 'Bangladesh'; // Default Bangladesh name
   List<dynamic> _countries = [];
 
   // Error messages
@@ -88,8 +87,6 @@ class _SignUpPageState extends State<SignUpPage> {
           _fullNameError == null &&
           _phoneNumberError == null &&
           _passwordError == null &&
-          _selectedRegion != 'Select Region' &&  // Region must be selected
-          _selectedCountryCode != null &&        // Country must be selected
           _termsAccepted;
     });
   }
@@ -99,27 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
         await rootBundle.rootBundle.loadString('lib/assets/data/countries.json');
     final Map<String, dynamic> countryData = json.decode(jsonString);
     setState(() {
-      _countries = countryData[_selectedRegion] ?? [];
-    });
-  }
-
-  void _onRegionChanged(String? value) {
-    setState(() {
-      _selectedRegion = value!;
-      _selectedCountryCode = null;
-      _selectedCountryName = null;
-      _loadCountries();
-      _checkInputFields();  // Recheck if the button should be active
-    });
-  }
-
-  void _onCountryChanged(String? value) {
-    setState(() {
-      final selectedCountry =
-          _countries.firstWhere((country) => country['code'] == value);
-      _selectedCountryCode = selectedCountry['code'];
-      _selectedCountryName = selectedCountry['name'];
-      _checkInputFields();  // Recheck if the button should be active
+      _countries = countryData['Asia'] ?? [];
     });
   }
 
@@ -180,9 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               errorMessage: _fullNameError),
                         ),
                         SizedBox(height: 16),
-                        _buildRegionDropdown(),
-                        SizedBox(height: 16),
-                        _buildCountryDropdown(),
+                        _buildCountryDropdown(), // Only country dropdown used
                         SizedBox(height: 16),
                         GestureDetector(
                           onTap: () {
@@ -439,52 +414,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildRegionDropdown() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFF151211),
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFF92432A).withOpacity(0.8),
-            offset: Offset(-4, -4),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-          BoxShadow(
-            color: Color(0xFF92432A).withOpacity(0.5),
-            offset: Offset(4, 4),
-            blurRadius: 10,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: DropdownButtonFormField<String>(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Color(0xFF151211),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide.none,
-          ),
-        ),
-        value: _selectedRegion,
-        items: ['Select Region', 'Asia', 'Europe', 'America', 'Africa', 'Oceania']
-            .map((region) => DropdownMenuItem(
-                  value: region,
-                  child: Text(
-                    region,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ))
-            .toList(),
-        onChanged: _onRegionChanged,
-        dropdownColor: Color(0xFF151211),
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
-
   Widget _buildCountryDropdown() {
     return Container(
       decoration: BoxDecoration(
@@ -505,32 +434,17 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ],
       ),
-      child: DropdownButtonFormField<String>(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Color(0xFF151211),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide.none,
-          ),
-        ),
-        value: _selectedCountryCode,
-        hint: Text(
-          'Select Country',
-          style: TextStyle(color: Colors.white),
-        ),
-        items: _countries.map((country) {
-          return DropdownMenuItem<String>(
-            value: country['code'],
-            child: Text(
-              '${country['name']}',
-              style: TextStyle(color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              '🇧🇩 $_selectedCountryName', // Flag emoji and country name
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
-          );
-        }).toList(),
-        onChanged: _onCountryChanged,
-        dropdownColor: Color(0xFF151211),
-        style: TextStyle(color: Colors.white),
+          ],
+        ),
       ),
     );
   }

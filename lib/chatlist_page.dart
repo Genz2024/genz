@@ -248,12 +248,13 @@ class _ChatListPageState extends State<ChatListPage>
                       ),
                       onTap: () {
                         // চ্যাট আইটেম ক্লিক করলে chat_page এ চলে যাবে
+                        _closeDropdown(); // ড্রপডাউন বন্ধ করার জন্য ফাংশন কল করা হয়েছে
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ChatPage(
                               userName: index == 0
-                                  ? 'EyesMeet Team'
+                                  ? 'Gen-Z Team'
                                   : 'Tomioka Giyuu', // userName প্যারামিটার পাস করা হয়েছে
                               profileImage: 'lib/assets/images/profile$index.jpg', // String হিসেবে path পাস করা হয়েছে
                               lastActive: DateTime.now(), // lastActive প্যারামিটার DateTime হিসেবে পাস করা হয়েছে
